@@ -117,7 +117,8 @@ with st.sidebar:
     st.divider()
     st.caption("**Kiến trúc hệ thống:**")
     st.caption("Hybrid Retrieval (Semantic + BM25) → RRF Rerank → PageIndex Fallback → LLM Generation có Citation")
-    st.caption("**Model:** `google/gemini-2.5-flash:free` (OpenRouter)")
+    from src.task10_generation import LLM_MODEL
+    st.caption(f"**Model:** `{LLM_MODEL}` (OpenRouter)")
 
 # =============================================================================
 # SESSION STATE
