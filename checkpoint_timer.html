@@ -398,6 +398,19 @@
       color: #fff;
     }
 
+    .role-person {
+      font-size: 10px;
+      font-weight: 800;
+      color: #34d399;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(52, 211, 153, 0.35);
+      border-radius: 6px;
+      padding: 2px 7px;
+      display: inline-block;
+      margin-top: 4px;
+      letter-spacing: 0.2px;
+    }
+
     /* Multi-step details */
     .role-section-label {
       font-size: 10px;
@@ -1268,6 +1281,15 @@
       }
     ];
 
+    // REAL NAMES — Nhóm 5 người (điền tên thật thay cho "Role 1..5")
+    const TEAM5_NAMES = {
+      "Role 1": "Khôi",
+      "Role 2": "Trung",
+      "Role 3": "Hiển",
+      "Role 4": "Đức",
+      "Role 5": "Sơn"
+    };
+
     // STATE VARIABLES
     let currentCPIndex = 0;
     let teamSize = 4;
@@ -1356,12 +1378,16 @@
           </li>
         `).join('');
 
+        const personName = teamSize === 5 ? TEAM5_NAMES[r.role] : null;
+        const personHTML = personName ? `<div class="role-person">👤 ${personName}</div>` : '';
+
         card.innerHTML = `
           <div>
             <div class="role-head">
               <span class="role-badge ${r.badgeClass}">${r.role}</span>
               <span class="role-name">${r.name}</span>
             </div>
+            ${personHTML}
 
             <div style="margin-top: 6px;">
               <div class="role-section-label">📌 Mục tiêu:</div>

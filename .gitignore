@@ -12,6 +12,10 @@ venv/
 # Temp PDF conversion cache
 data/_tmp_pdf/
 
+# Task 4: vector store sinh ra khi chạy, không sync qua git — mỗi máy tự regenerate.
+# Binary DB, nếu commit sẽ phình repo + conflict nhị phân khi nhiều người index riêng.
+chroma_db/
+
 # Temp / cache
 .pytest_cache/
 *.tmp

@@ -37,8 +37,10 @@ TOP_P = 0.9
 # Chọn 0.3 vì: RAG cần factual, ít sáng tạo
 TEMPERATURE = 0.3
 
-# TODO: Chọn LLM model (OpenRouter model ID)
-LLM_MODEL = os.getenv("LLM_MODEL", "google/gemini-2.5-flash:free")  # Hoặc openai/gpt-4o-mini / meta-llama/llama-3.3-70b-instruct:free
+# google/gemini-2.5-flash:free đã bị OpenRouter rút khỏi free tier (404 "unavailable
+# for free" khi test thật ngày 04/08). Đổi sang inclusionai/ling-3.0-flash:free — xác
+# nhận còn free + hoạt động thật qua GET https://openrouter.ai/api/v1/models lúc sửa.
+LLM_MODEL = os.getenv("LLM_MODEL", "inclusionai/ling-3.0-flash:free")  # Hoặc openai/gpt-4o-mini (trả phí) nếu có credit
 
 
 # =============================================================================

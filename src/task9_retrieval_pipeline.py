@@ -35,10 +35,11 @@ from .task8_pageindex_vectorless import pageindex_search
 # CONFIGURATION
 # =============================================================================
 
-# TODO: Calibrate threshold này bằng cách tự đo điểm cosine của semantic_search
-# cho câu hỏi liên quan vs câu hỏi lạc đề (xem ghi chú ở trên) — ĐỪNG copy nguyên
-# giá trị mẫu, mỗi corpus/embedding model sẽ cho khoảng điểm khác nhau.
-SCORE_THRESHOLD = 0.3   # Nếu best score (cosine gốc) < threshold → fallback PageIndex
+# Calibrate thực đo trên corpus HUST + bge-m3 (không copy số mẫu):
+#   5 câu liên quan (học phí/học bổng/đăng ký học phần/thôi học)  -> score 0.567–0.734
+#   4 câu lạc đề (nonsense/vé máy bay/nấu ăn/bóng đá)              -> score 0.357–0.409
+# Khoảng trống rõ ràng giữa 2 nhóm -> chọn điểm giữa.
+SCORE_THRESHOLD = 0.48  # Nếu best score (cosine gốc) < threshold → fallback PageIndex
 DEFAULT_TOP_K = 5
 RERANK_METHOD = "rrf"  # "cross_encoder" | "mmr" | "rrf"
 
@@ -77,33 +78,35 @@ def retrieve(
             'source': str  # 'hybrid' hoặc 'pageindex'
         }
     """
-    # TODO: Implement full retrieval pipeline
-    #
     # Step 1: Song song chạy semantic + lexical
-    # dense_results = semantic_search(query, top_k=top_k * 2)
-    # sparse_results = lexical_search(query, top_k=top_k * 2)
-    #
-    # Step 2: Merge bằng RRF
-    # merged = rerank_rrf([dense_results, sparse_results], top_k=top_k * 2)
-    # for item in merged:
-    #     item["source"] = "hybrid"
-    #
-    # Step 3: Rerank
-    # if use_reranking and merged:
-    #     final_results = rerank(query, merged, top_k=top_k, method=RERANK_METHOD)
-    # else:
-    #     final_results = merged[:top_k]
-    #
+    dense_results = semantic_search(query, top_k=top_k * 2)
+    sparse_results = lexical_search(query, top_k=top_k * 2)
+
+    # Step 2: Merge bằng RRF — bản thân RRF đã là 1 phép "rerank" theo thứ hạng
+    # kết hợp từ 2 ranker, nên merged đã sẵn sàng dùng làm final_results.
+    merged = rerank_rrf([dense_results, sparse_results], top_k=top_k * 2)
+    for item in merged:
+        item["source"] = "hybrid"
+
+    # Step 3: Rerank thêm (chỉ áp dụng khi chọn 1 reranker khác RRF, vd cross_encoder
+    # với JINA_API_KEY thật). KHÔNG gọi rerank(method="rrf") ở đây: nhánh "rrf" của
+    # dispatcher cố ý raise NotImplementedError (xem task7 dòng 180-182) vì RRF cần
+    # nhiều ranked_lists riêng biệt, không nhận 1 list candidates đã merge — gọi lại
+    # sẽ luôn crash bất kể rerank_rrf() đã cài đặt hay chưa.
+    if use_reranking and merged and RERANK_METHOD != "rrf":
+        final_results = rerank(query, merged, top_k=top_k, method=RERANK_METHOD)
+    else:
+        final_results = merged[:top_k]
+
     # Step 4: Check threshold DÙNG ĐIỂM COSINE GỐC (dense_results), KHÔNG PHẢI RRF
-    # best_score = dense_results[0]["score"] if dense_results else 0.0
-    # if best_score < score_threshold:
-    #     print(f"  ⚠ Semantic best score ({best_score:.3f}) < threshold ({score_threshold})")
-    #     fallback = pageindex_search(query, top_k=top_k)
-    #     if fallback:
-    #         return fallback
-    #
-    # return final_results[:top_k]
-    raise NotImplementedError("Implement retrieve")
+    best_score = dense_results[0]["score"] if dense_results else 0.0
+    if best_score < score_threshold:
+        print(f"  ⚠ Semantic best score ({best_score:.3f}) < threshold ({score_threshold})")
+        fallback = pageindex_search(query, top_k=top_k)
+        if fallback:
+            return fallback
+
+    return final_results[:top_k]
 
 
 if __name__ == "__main__":
