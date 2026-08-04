@@ -69,20 +69,21 @@ Xem code mẫu (DeepEval/RAGAS/TruLens) chi tiết trong `README.md` gốc mục
 
 ## Kiến Trúc Hệ Thống
 
-```
-[Vẽ diagram kiến trúc ở đây]
-```
+Xem sơ đồ chi tiết (Mermaid flowchart, màu theo người phụ trách) tại [`ARCHITECTURE.md`](../ARCHITECTURE.md).
 
 ---
 
 ## Phân Công Công Việc
 
-| Thành viên | MSSV | Nhiệm vụ | Trạng thái |
-|-----------|------|----------|------------|
-| | | | |
-| | | | |
-| | | | |
-| | | | |
+> Đồng bộ với bảng phân công ở `README.md` gốc và `checkpoint_timer.html` (Nhóm 5). CP5 là lúc ghép các module cá nhân lại thành sản phẩm nhóm.
+
+| Thành viên | MSSV | Role | Việc ở CP5 (Chatbot UI + RAGAS) | Việc ở CP6 (Demo) | Trạng thái |
+|-----------|------|------|----------------------------------|--------------------|------------|
+| Khôi | | Role 1 — Team Leader & Architect | Điều phối ghép code, duyệt `results.md` đủ bảng điểm | Thuyết trình tổng quan kiến trúc, điều phối Q&A | Chưa bắt đầu |
+| Trung | | Role 2 — Data & Dense Search Dev | Nối `generate_with_citation()` (Task 10) vào `app.py`, xử lý `sources` cho UI | Giải đáp kỹ thuật ChromaDB/bge-m3/RRF | Chưa bắt đầu |
+| Hiển | | Role 3 — Sparse & Rerank Dev | Thêm slider `top_k` ở sidebar, hiển thị kiến trúc Supervisor | Giải thích RRF Rerank + PageIndex fallback | Chưa bắt đầu |
+| Đức | | Role 4 — Frontend & Chatbot Dev | Hoàn thiện `st.chat_message`, nút gợi ý câu hỏi mẫu | Trực tiếp thao tác live demo Streamlit | Chưa bắt đầu |
+| Sơn | | Role 5 — Evaluation & QA Engineer | Viết 15+ cặp Q&A `golden_dataset.json`, chạy `eval_pipeline.py`, xuất `results.md` (so sánh Hybrid vs Dense-only) | Báo cáo 4 chỉ số RAGAS + phân tích A/B | Chưa bắt đầu |
 
 ---
 

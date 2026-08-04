@@ -27,7 +27,7 @@ Xây dựng một RAG pipeline thực tế, end-to-end, từ thu thập dữ li�
 
 **Chính sách/quy định dịch vụ đại học** (học phí, học bổng, ký túc xá, đăng ký học phần) + **Thông tin/thông báo đại học** (sự kiện, dịch vụ thư viện, hỗ trợ sinh viên)
 
-Dữ liệu mẫu trong repo được crawl thật từ trang công khai của **RMIT Vietnam** (rmit.edu.vn) — xem chi tiết URL nguồn trong `src/task1_collect_legal_docs.py` và `src/task2_crawl_news.py`.
+Dữ liệu mẫu trong repo được thu thập thật từ trang công khai của **Đại học Bách Khoa Hà Nội** (hust.edu.vn) — xem chi tiết URL nguồn trong `data/landing/legal/SOURCES.md`, `data/landing/news/SOURCES.md`, `src/task1_collect_legal_docs.py` và `src/task2_crawl_news.py`.
 
 ---
 
@@ -73,7 +73,7 @@ K3-Day08-RAG-Pipeline-Starter/
 
 Tìm và tải về **tối thiểu 3 văn bản chính sách/quy định** dạng PDF/DOCX về dịch vụ đại học (học phí, học bổng, ký túc xá, đăng ký học phần). Lưu vào `data/landing/`.
 
-**Gợi ý nguồn** (ví dụ trang công khai RMIT Vietnam):
+**Gợi ý nguồn** (ví dụ trang công khai Đại học Bách Khoa Hà Nội — HUST):
 - Học phí & phương thức thanh toán (Tuition Fees)
 - Chính sách học bổng (Scholarship eligibility)
 - Quy định ký túc xá / hỗ trợ chỗ ở (Accommodation Services)
@@ -81,7 +81,7 @@ Tìm và tải về **tối thiểu 3 văn bản chính sách/quy định** dạ
 
 **Yêu cầu:**
 - Lưu file gốc (PDF/DOCX) vào `data/landing/legal/`
-- Đặt tên file rõ ràng: `tuition-fees-rmit.pdf`, `academic-achievement-scholarship-rmit.pdf`, ...
+- Đặt tên file rõ ràng: `tuition-fee-appendix-hust.pdf`, `scholarship-process-hust.pdf`, ...
 
 ---
 
@@ -125,11 +125,11 @@ from markitdown import MarkItDown
 md = MarkItDown()
 
 # Convert PDF
-result = md.convert("data/landing/legal/tuition-fees-rmit.pdf")
+result = md.convert("data/landing/legal/tuition-fee-appendix-hust.pdf")
 print(result.text_content)
 
 # Convert DOCX
-result = md.convert("data/landing/legal/academic-achievement-scholarship-rmit.docx")
+result = md.convert("data/landing/legal/scholarship-process-hust.docx")
 ```
 
 **Lưu ý:** MarkItDown cần cài thêm extra `pip install "markitdown[pdf]"` để convert được file
@@ -138,7 +138,7 @@ PDF — nếu chỉ `pip install markitdown` sẽ báo lỗi `MissingDependencyE
 **Yêu cầu:**
 - Output lưu vào `data/standardized/`
 - Giữ nguyên cấu trúc thư mục con (`legal/`, `news/`)
-- Mỗi file output có tên tương ứng: `tuition-fees-rmit.md`
+- Mỗi file output có tên tương ứng: `tuition-fee-appendix-hust.md`
 
 ---
 
@@ -549,20 +549,21 @@ run_dashboard()
 
 ### Kiến Trúc Hệ Thống
 
-```
-[Vẽ diagram kiến trúc ở đây]
-```
+Xem sơ đồ chi tiết (Mermaid flowchart, màu theo người phụ trách) tại [`ARCHITECTURE.md`](./ARCHITECTURE.md).
 
 ---
 
 ### Phân Công Công Việc
 
-| Thành viên | MSSV | Nhiệm vụ | Trạng thái |
-|-----------|------|----------|------------|
-| | | | |
-| | | | |
-| | | | |
-| | | | |
+> Vai trò dựa theo `checkpoint_timer.html` (chọn "Nhóm 5") — mỗi role gắn với 1 nhánh công việc xuyên suốt Task 1→10, không đổi người giữa các checkpoint để giữ tính liền mạch.
+
+| Thành viên | MSSV | Role | Nhiệm vụ xuyên suốt (Task 1-10 + Nhóm) | Trạng thái |
+|-----------|------|------|------------------------------------------|------------|
+| Khôi | | Role 1 — Team Leader & Architect | Điều phối phân công & tiến độ Git; duyệt config (CHUNK_SIZE=800/OVERLAP=100, RRF k=60, SCORE_THRESHOLD=0.48); tổng hợp code tốt nhất vào `app.py`; thuyết trình tổng quan kiến trúc CP6 | Chưa bắt đầu |
+| Trung | | Role 2 — Data & Dense Search Dev | Task 1 (thu thập ≥3 PDF chính sách) → Task 4 (chunking + indexing ChromaDB) → Task 7 (`rerank_rrf()`) → Task 9 (nối hybrid `retrieve()`) → nối `generate_with_citation()` vào `app.py` | Chưa bắt đầu |
+| Hiển | | Role 3 — Sparse & Rerank Dev | Task 2 (crawl ≥5 bài tin tức) → Task 5 (`semantic_search()` + HyDE) → Task 7 mở rộng (cross-encoder Jina, có key mới chạy) → Task 9 (canh ngưỡng fallback 0.48 dùng điểm Cosine gốc) | Chưa bắt đầu |
+| Đức | | Role 4 — Frontend & Chatbot Dev | Hỗ trợ rà soát `data/landing/` → Task 6 (`lexical_search()` BM25) → Task 8 (PageIndex vectorless) → Task 10 (`reorder_for_llm()` + citation) → UI Streamlit `app.py` + demo live CP6 | Chưa bắt đầu |
+| Sơn | | Role 5 — Evaluation & QA Engineer | Task 3 (convert Markdown) → chạy `pytest tests/test_individual.py` cuối mỗi checkpoint → `golden_dataset.json` (15+ câu) + chạy RAGAS eval → viết `results.md` + báo cáo A/B CP6 |  Chưa bắt đầu |
 
 ---
 

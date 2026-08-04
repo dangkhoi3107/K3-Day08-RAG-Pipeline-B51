@@ -1,17 +1,97 @@
 [
   {
-    "question": "Học phí hàng năm của chương trình Business tại RMIT Vietnam là bao nhiêu?",
-    "expected_answer": "Khoảng 375.840.000 VND mỗi năm (tùy chương trình cụ thể).",
-    "expected_context": "Trang Tuition Fees, mục Undergraduate Programs"
+    "question": "Học phí tại Đại học Bách khoa Hà Nội được tính dựa trên cơ sở nào?",
+    "expected_answer": "Học phí được tính theo số tín chỉ học phí (TCHP) của các học phần mà sinh viên đăng ký học ở mỗi học kỳ.",
+    "expected_context": "Phụ lục cách tính học phí, đoạn mở đầu về TCHP"
   },
   {
-    "question": "Học phí được thanh toán theo hình thức nào?",
-    "expected_answer": "Thanh toán theo từng học kỳ, tính theo từng môn học đã đăng ký.",
-    "expected_context": "Trang Tuition Fees, mục Payment Structure"
+    "question": "Số tín chỉ học phí (TCHP) của một học phần được xác định theo những yếu tố nào?",
+    "expected_answer": "Theo loại học phần, thời lượng giảng dạy và số tín chỉ học tập (TCHT).",
+    "expected_context": "Phụ lục học phí, đoạn mở đầu"
   },
   {
-    "question": "Trường có cung cấp ký túc xá trong khuôn viên không?",
-    "expected_answer": "Không — trường không cung cấp chỗ ở trong khuôn viên, nhưng có đội ngũ hỗ trợ sinh viên tìm chỗ ở gần trường.",
-    "expected_context": "Trang Accommodation Services"
+    "question": "Với học phần thông thường, 15 tiết giờ lý thuyết/bài tập tương ứng bao nhiêu TCHP?",
+    "expected_answer": "15 tiết lý thuyết, bài tập, giờ BTL quy đổi = 1 TCHP.",
+    "expected_context": "Phụ lục học phí, mục 1a — học phần thông thường"
+  },
+  {
+    "question": "Với giờ thí nghiệm/thực hành của học phần thông thường, 15 tiết bằng bao nhiêu TCHP?",
+    "expected_answer": "15 tiết thí nghiệm/thực hành = 1,5 TCHP.",
+    "expected_context": "Phụ lục học phí, mục 1b"
+  },
+  {
+    "question": "Học phần thí nghiệm chuyên ngành được quy đổi học phí như thế nào?",
+    "expected_answer": "1 TCHT = 3,0 TCHP.",
+    "expected_context": "Phụ lục học phí, mục 2 — học phần thí nghiệm chuyên ngành"
+  },
+  {
+    "question": "Thực tập tốt nghiệp được tính học phí ra sao?",
+    "expected_answer": "1 TCHT = 2,5 TCHP.",
+    "expected_context": "Phụ lục học phí, mục 4 — thực tập tốt nghiệp"
+  },
+  {
+    "question": "Khóa luận tốt nghiệp hoặc đồ án tốt nghiệp được quy đổi bao nhiêu TCHP mỗi tín chỉ học tập?",
+    "expected_answer": "1 TCHT = 2,5 TCHP.",
+    "expected_context": "Phụ lục học phí, mục 5 — khóa luận/đồ án tốt nghiệp"
+  },
+  {
+    "question": "Đồ án môn học, đồ án chuyên ngành được tính học phí như thế nào?",
+    "expected_answer": "1 TCHT = 2,0 TCHP.",
+    "expected_context": "Phụ lục học phí, mục 6 — đồ án môn học/chuyên ngành"
+  },
+  {
+    "question": "Học phần Giáo dục thể chất được quy đổi bao nhiêu TCHP cho mỗi tín chỉ học tập?",
+    "expected_answer": "1 TCHT = 1,5 TCHP.",
+    "expected_context": "Phụ lục học phí, mục 7 — Giáo dục thể chất"
+  },
+  {
+    "question": "Thực tập cơ sở, thực tập kỹ thuật, thực tập nhận thức được tính bao nhiêu TCHP mỗi tín chỉ học tập?",
+    "expected_answer": "1 TCHT = 2,0 TCHP.",
+    "expected_context": "Phụ lục học phí, mục 3 — thực tập cơ sở/kỹ thuật/nhận thức"
+  },
+  {
+    "question": "Sinh viên đăng ký học bổng trên hệ thống nào của trường?",
+    "expected_answer": "Trên website Quản lý đào tạo (QLĐT) tại địa chỉ https://qldt.hust.edu.vn/, vào tab HỌC BỔNG rồi chọn Đăng ký học bổng.",
+    "expected_context": "Hướng dẫn đăng ký học bổng, mục I — Hướng dẫn đăng nhập chung"
+  },
+  {
+    "question": "Màn hình Thông tin chi tiết học bổng gồm những phần nào?",
+    "expected_answer": "Gồm 2 phần: Thông tin chi tiết học bổng (do cán bộ quản lý cung cấp) và Hồ sơ đăng ký học bổng của sinh viên (nơi SV kê khai thông tin).",
+    "expected_context": "Hướng dẫn đăng ký học bổng, mục II bước 3"
+  },
+  {
+    "question": "Hồ sơ đăng ký học bổng có những trạng thái xét duyệt nào?",
+    "expected_answer": "Đăng ký (chưa kê khai), Chưa nộp (đã kê khai và lưu nhưng chưa nộp), Chờ duyệt (đã nộp hồ sơ), Đã ra QĐ cấp HB (đã có quyết định chính thức cấp học bổng), và Bị từ chối.",
+    "expected_context": "Hướng dẫn đăng ký học bổng, mục II bước 6 — các trạng thái hồ sơ"
+  },
+  {
+    "question": "Trạng thái 'Chờ duyệt' của hồ sơ học bổng nghĩa là gì?",
+    "expected_answer": "Nghĩa là sinh viên đã Nộp hồ sơ đăng ký học bổng.",
+    "expected_context": "Hướng dẫn đăng ký học bổng, danh sách trạng thái hồ sơ"
+  },
+  {
+    "question": "Sau khi nộp hồ sơ đăng ký học bổng, sinh viên có chỉnh sửa được thông tin không?",
+    "expected_answer": "Không. Sau khi nhấn Nộp đề xuất để nộp hồ sơ, sinh viên sẽ không chỉnh sửa được thông tin nữa.",
+    "expected_context": "Hướng dẫn đăng ký học bổng, mục II bước 5"
+  },
+  {
+    "question": "Các trường thông tin kết quả học tập như điểm CPA, GPA trong hồ sơ học bổng do ai điền?",
+    "expected_answer": "Hệ thống tự động điền theo kỳ học mà cán bộ quản lý đã chọn để lấy điểm; sinh viên không được phép chỉnh sửa các trường này.",
+    "expected_context": "Hướng dẫn đăng ký học bổng, mục II bước 4 — thông tin kết quả học tập"
+  },
+  {
+    "question": "Sự khác nhau giữa nút 'Lưu' và nút 'Nộp đề xuất' khi đăng ký học bổng là gì?",
+    "expected_answer": "Nút Lưu dùng để lưu bản nháp hồ sơ; nút Nộp đề xuất dùng để nộp chính thức hồ sơ đăng ký học bổng (sau khi nộp thì không sửa được).",
+    "expected_context": "Hướng dẫn đăng ký học bổng, mục II bước 5"
+  },
+  {
+    "question": "Đơn vị nào của Đại học Bách khoa Hà Nội ban hành hướng dẫn quy trình đăng ký học bổng?",
+    "expected_answer": "Ban Công tác Sinh viên, Đại học Bách khoa Hà Nội (Hà Nội, 05/2024).",
+    "expected_context": "Trang bìa tài liệu Hướng dẫn quy trình sinh viên đăng ký học bổng"
+  },
+  {
+    "question": "Giá vé máy bay khứ hồi từ Hà Nội đi Paris hiện nay là bao nhiêu?",
+    "expected_answer": "Thông tin này không có trong tài liệu; hệ thống nên trả lời không thể xác minh thông tin này từ nguồn hiện có.",
+    "expected_context": "Không thuộc phạm vi tài liệu (câu hỏi lạc đề — dùng để kiểm tra fallback)"
   }
 ]
