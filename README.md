@@ -549,9 +549,7 @@ run_dashboard()
 
 ### Kiến Trúc Hệ Thống
 
-```
-[Vẽ diagram kiến trúc ở đây]
-```
+Xem sơ đồ chi tiết (Mermaid flowchart, màu theo người phụ trách) tại [`ARCHITECTURE.md`](./ARCHITECTURE.md).
 
 ---
 
