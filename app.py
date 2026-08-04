@@ -35,18 +35,18 @@ st.set_page_config(
 # =============================================================================
 
 with st.sidebar:
-    st.title("🎓 University Services RAG")
-    st.caption("Trợ lý hỏi đáp về dịch vụ và chính sách đại học (học phí, học bổng, ký túc xá, thư viện)")
+    st.title("🎓 HUST Services RAG")
+    st.caption("Trợ lý hỏi đáp quy chế & chính sách Đại học Bách khoa Hà Nội (HUST)")
 
     st.divider()
 
     st.subheader("💡 Câu hỏi gợi ý")
     suggestions = [
-        "Học phí tại RMIT Vietnam là bao nhiêu?",
-        "Làm sao để đặt phòng học nhóm ở thư viện?",
-        "Điều kiện xin học bổng Academic Achievement?",
-        "Dịch vụ hỗ trợ chỗ ở cho sinh viên như thế nào?",
-        "Cách đăng ký học phần qua myRMIT?",
+        "Mức học phí của Đại học Bách Khoa Hà Nội (HUST) là bao nhiêu?",
+        "Điều kiện xét nhận học bổng khuyến khích học tập tại HUST?",
+        "Quy định về đăng ký học phần và xử lý học tập HUST?",
+        "Dịch vụ thư viện và đăng ký phòng học nhóm sinh viên?",
+        "Thông tin hỗ trợ chỗ ở và Ký túc xá Bách khoa?",
     ]
     for s in suggestions:
         if st.button(s, use_container_width=True, key=f"sug_{s[:20]}"):
@@ -73,8 +73,8 @@ if "pending_query" not in st.session_state:
 # MAIN CHAT AREA
 # =============================================================================
 
-st.title("🎓 University Services RAG Chatbot")
-st.caption("Hệ thống hỏi đáp thông tin dịch vụ đại học (Học phí, Học bổng, Ký túc xá, Thư viện)")
+st.title("🎓 HUST Services RAG Chatbot")
+st.caption("Hệ thống hỏi đáp quy chế & chính sách Đại học Bách khoa Hà Nội (Học phí, Học bổng, Quy chế học tập, Ký túc xá)")
 
 # Hiển thị lịch sử chat
 for msg in st.session_state.messages:
