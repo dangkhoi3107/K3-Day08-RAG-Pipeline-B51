@@ -559,11 +559,11 @@ Xem sơ đồ chi tiết (Mermaid flowchart, màu theo người phụ trách) t�
 
 | Thành viên | MSSV | Role | Nhiệm vụ xuyên suốt (Task 1-10 + Nhóm) | Trạng thái |
 |-----------|------|------|------------------------------------------|------------|
-| Khôi | | Role 1 — Team Leader & Architect | Điều phối phân công & tiến độ Git; duyệt config (CHUNK_SIZE=800/OVERLAP=100, RRF k=60, SCORE_THRESHOLD=0.48); tổng hợp code tốt nhất vào `app.py`; thuyết trình tổng quan kiến trúc CP6 | Chưa bắt đầu |
-| Trung | | Role 2 — Data & Dense Search Dev | Task 1 (thu thập ≥3 PDF chính sách) → Task 4 (chunking + indexing ChromaDB) → Task 7 (`rerank_rrf()`) → Task 9 (nối hybrid `retrieve()`) → nối `generate_with_citation()` vào `app.py` | Chưa bắt đầu |
-| Hiển | | Role 3 — Sparse & Rerank Dev | Task 2 (crawl ≥5 bài tin tức) → Task 5 (`semantic_search()` + HyDE) → Task 7 mở rộng (cross-encoder Jina, có key mới chạy) → Task 9 (canh ngưỡng fallback 0.48 dùng điểm Cosine gốc) | Chưa bắt đầu |
-| Đức | | Role 4 — Frontend & Chatbot Dev | Hỗ trợ rà soát `data/landing/` → Task 6 (`lexical_search()` BM25) → Task 8 (PageIndex vectorless) → Task 10 (`reorder_for_llm()` + citation) → UI Streamlit `app.py` + demo live CP6 | Chưa bắt đầu |
-| Sơn | | Role 5 — Evaluation & QA Engineer | Task 3 (convert Markdown) → chạy `pytest tests/test_individual.py` cuối mỗi checkpoint → `golden_dataset.json` (15+ câu) + chạy RAGAS eval → viết `results.md` + báo cáo A/B CP6 |  Chưa bắt đầu |
+| Khôi (Phạm Nguyễn Đăng Khôi) | 2A202601243 | Role 1 — Team Leader & Architect | Điều phối phân công & tiến độ Git; duyệt config (CHUNK_SIZE=800/OVERLAP=100, RRF k=60, SCORE_THRESHOLD=0.48); tổng hợp code tốt nhất vào `app.py`; thuyết trình tổng quan kiến trúc CP6 | Chưa bắt đầu |
+| Trung (Trần Đức Bảo Trung) | 2A202601269 | Role 2 — Data & Dense Search Dev | Task 1 (thu thập ≥3 PDF chính sách) → Task 4 (chunking + indexing ChromaDB) → Task 7 (`rerank_rrf()`) → Task 9 (nối hybrid `retrieve()`) → nối `generate_with_citation()` vào `app.py` | Chưa bắt đầu |
+| Hiển (Vi Minh Hiển) | 2A202601743 | Role 3 — Sparse & Rerank Dev | Task 2 (crawl ≥5 bài tin tức) → Task 5 (`semantic_search()` + HyDE) → Task 7 mở rộng (cross-encoder Jina, có key mới chạy) → Task 9 (canh ngưỡng fallback 0.48 dùng điểm Cosine gốc) | Chưa bắt đầu |
+| Đức (Nguyễn Đăng Đức) | 2A202601787 | Role 4 — Frontend & Chatbot Dev | Hỗ trợ rà soát `data/landing/` → Task 6 (`lexical_search()` BM25) → Task 8 (PageIndex vectorless) → Task 10 (`reorder_for_llm()` + citation) → UI Streamlit `app.py` + demo live CP6 | Chưa bắt đầu |
+| Sơn (Đỗ Tuấn Sơn) | 2A202601051 | Role 5 — Evaluation & QA Engineer | Task 3 (convert Markdown) → chạy `pytest tests/test_individual.py` cuối mỗi checkpoint → `golden_dataset.json` (15+ câu) + chạy RAGAS eval → viết `results.md` + báo cáo A/B CP6 |  Chưa bắt đầu |
 
 ---
 
