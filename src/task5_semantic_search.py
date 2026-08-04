@@ -26,35 +26,60 @@ def semantic_search(query: str, top_k: int = 10) -> list[dict]:
         }
         Sorted by score descending.
     """
-    # TODO: Implement semantic search
-    #
-    # Bước 1: Embed query bằng cùng model ở Task 4
-    # Bước 2: Query vector store (cosine similarity)
-    # Bước 3: Return top_k results
-    #
-    # Ví dụ với ChromaDB:
-    # from .task4_chunking_indexing import get_collection, get_embedding_model
-    #
-    # model = get_embedding_model()
-    # query_vector = model.encode(query).tolist()
-    #
-    # collection = get_collection()
-    # results = collection.query(
-    #     query_embeddings=[query_vector],
-    #     n_results=top_k,
-    #     include=["documents", "metadatas", "distances"],
-    # )
-    #
-    # output = []
-    # for doc, meta, dist in zip(
-    #     results["documents"][0], results["metadatas"][0], results["distances"][0]
-    # ):
-    #     score = max(0.0, 1.0 - dist)  # cosine distance → similarity
-    #     output.append({"content": doc, "score": round(score, 4), "metadata": meta})
-    #
-    # output.sort(key=lambda x: x["score"], reverse=True)
-    # return output[:top_k]
-    raise NotImplementedError("Implement semantic_search")
+    if not isinstance(query, str):
+        raise TypeError("query phải là chuỗi")
+    if not isinstance(top_k, int):
+        raise TypeError("top_k phải là số nguyên")
+    if not query.strip() or top_k <= 0:
+        return []
+
+    # Task 4 sở hữu model và Chroma collection để bảo đảm indexing/query dùng
+    # đúng cùng embedding model. Import lazy giúp module vẫn import được trước
+    # khi Task 4 khởi tạo xong.
+    try:
+        from .task4_chunking_indexing import (
+            get_collection,
+            get_embedding_model,
+        )
+    except ImportError:
+        return []
+
+    collection = get_collection()
+    collection_size = collection.count()
+    if collection_size == 0:
+        return []
+
+    model = get_embedding_model()
+    query_embedding = model.encode(query.strip())
+    if hasattr(query_embedding, "tolist"):
+        query_embedding = query_embedding.tolist()
+
+    n_results = min(top_k, collection_size)
+    results = collection.query(
+        query_embeddings=[query_embedding],
+        n_results=n_results,
+        include=["documents", "metadatas", "distances"],
+    )
+
+    documents = (results.get("documents") or [[]])[0]
+    metadatas = (results.get("metadatas") or [[]])[0]
+    distances = (results.get("distances") or [[]])[0]
+
+    output = []
+    for document, metadata, distance in zip(documents, metadatas, distances):
+        if document is None or distance is None:
+            continue
+        score = max(0.0, 1.0 - float(distance))
+        output.append(
+            {
+                "content": document,
+                "score": round(score, 4),
+                "metadata": metadata or {},
+            }
+        )
+
+    output.sort(key=lambda item: item["score"], reverse=True)
+    return output[:top_k]
 
 
 if __name__ == "__main__":
