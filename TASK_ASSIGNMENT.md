@@ -69,7 +69,7 @@ Không sở hữu file code riêng — vai trò là duyệt config dùng chung �
 ### Task 2 — `src/task2_crawl_news.py`
 - **Trạng thái:** `ARTICLE_URLS = []` (rỗng), `crawl_article()` raise `NotImplementedError`, `crawl_all()` **đã viết xong** (không cần sửa).
 - **Cần sửa:**
-  1. Điền `ARTICLE_URLS` (dòng 33-37) — dùng nguồn HUST: trang Library news + các bài event con, "Book a study room", "Đăng ký ở Ký túc xá" (`ctt.hust.edu.vn/DisplayWeb/DisplayBaiViet?baiviet=35416`), student news — cần ≥5 URL.
+  1. Điền `ARTICLE_URLS` (dòng 33-37) — danh sách 6 link HUST đã xác minh sẵn trong `data/landing/news/SOURCES.md`, cần ≥5 URL.
   2. Implement `crawl_article()` (dòng 40-63) — bỏ comment code mẫu dùng `AsyncWebCrawler`.
 - **Cài trước:** `pip install crawl4ai` **và** `playwright install chromium` (thiếu bước 2 → lỗi `BrowserType.launch: Executable doesn't exist`).
 - **Test:** `pytest tests/test_individual.py -k TestTask2 -v` (4 test: ≥5 file, có nội dung, JSON có field `url`).
